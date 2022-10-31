@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="app-builder-web-sdk.var.js"></script>
+  <link rel="stylesheet" type="text/css" href="index.css" /> 
+  <script>
+    // Install FPE
+    AgoraAppBuilder.default.customize({})
+
+    function joinMeeting() {
+      AgoraAppBuilder.default.join(document.getElementById("meetingId").value)
+    }
+
+    AgoraAppBuilder.default.on("create", (hostMeetingId, attendeeMeetingId, pstnNumber) => {
+      console.log("HTML Host App: Meeting created with", {
+        hostMeetingId,
+        attendeeMeetingId,
+        pstnNumber,
+      });
+    });
+    AgoraAppBuilder.default.on("preJoin", (meetingTitle, deviceList) => {
+      console.log("HTML Host App: precall with", { meetingTitle, deviceList });
+    });
+    AgoraAppBuilder.default.on("join", (meetingTitle, deviceList, isHost) => {
+      console.log("HTML Host App: Meeting joined with", { meetingTitle, deviceList, isHost });
+    });
+    AgoraAppBuilder.default.on("leave", () => {
+      console.log("HTML Host App: Meeting left");
+    });
+  </script>
+</head>
+
+<body>
+  <div class="App">
+    <div class="header">
+      <span>My HTML App</span>
+      <input id="meetingId" type="text" placeholder="Room id"></input>
+      <button onclick="joinMeeting()">Join</button>
+    </div>
+    <div style=" display: flex; flex: 1 ">
+      <app-builder />
+    </div>
+  </div>
+</body>
+
+</html>
