@@ -1,24 +1,18 @@
-# vue-app
+This repository is for the following [blog](https://appbuilder-docs.agora.io/sdks/guides/embed_web_sdk_vue)
 
-## Project setup
-```
-npm install
-```
+# Build Web-sdk
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- Build web-sdk via cli, refer to the blog for instructions on how to do it.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+# Uninstall and Re-Install Appbuilder Embed-SDK package Along with other dependencies
 
-### Lints and fixes files
-```
-npm run lint
-```
+- Go to where this directory is cloned
+- `npm uninstall @appbuilder/web`
+- `npm install <path-to-app-builder>/Builds/web-sdk/appbuilder-web-[version]-[hash].tgz`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<!-- # Install additional dependencies [NOT NEEDED FOR SAMPLE APP]
+- `npm install react-router-dom@5 @apollo/client@3 nanoid@4` -->
+
+# Run the app
+
+- `npm run serve`
