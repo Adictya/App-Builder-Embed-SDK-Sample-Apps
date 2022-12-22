@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./app.css";
 import AppBuilderReactSdk from "@appbuilder/react";
 
 function App() {
+  const eventUnsubscriptionEvents = useRef([]);
   useEffect(() => {
     const myCustomization = AppBuilderReactSdk.createCustomization({
       // components:{
@@ -44,6 +45,14 @@ function App() {
     const unsubLeaveEvent = AppBuilderReactSdk.on("leave", () => {
       console.log("React Host App: left");
     });
+
+    myRef.current = [
+      unsubCreateEvent(),
+      unsubReadyToJoinEvent(),
+      unsubJoinEvent(),
+      unsubLeaveEvent(),
+    ];
+
     return () => {
       unsubCreateEvent();
       unsubReadyToJoinEvent();
@@ -56,12 +65,19 @@ function App() {
     AppBuilderReactSdk.join(document.getElementById("meetingId").value);
   };
 
+  const unsubscribe = () => {
+    myRef.current.forEach((element) => {
+      element();
+    });
+  };
+
   return (
     <div className="App">
       <div className="header">
         <span>My React App</span>
         <input id="meetingId" type="text" placeholder="Room id"></input>
         <button onClick={joinMeeting}>Join</button>
+        <button onClick={unsubscribe}>Unsubscribe</button>
       </div>
       <div style={{ display: "flex", flex: 1 }}>
         <AppBuilderReactSdk.View />
