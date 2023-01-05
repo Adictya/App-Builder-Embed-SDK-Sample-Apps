@@ -46,7 +46,7 @@ function App() {
       console.log("React Host App: left");
     });
 
-    myRef.current = [
+    eventUnsubscriptionEvents.current = [
       unsubCreateEvent(),
       unsubReadyToJoinEvent(),
       unsubJoinEvent(),
@@ -62,12 +62,16 @@ function App() {
   }, []);
 
   const joinMeeting = () => {
+    console.log(document.getElementById("meetingId").value);
     AppBuilderReactSdk.join(document.getElementById("meetingId").value);
   };
 
   const unsubscribe = () => {
-    myRef.current.forEach((element) => {
-      element();
+    eventUnsubscriptionEvents.current.forEach((element) => {
+      if (element) {
+        console.log("elment", element);
+        element();
+      }
     });
   };
 
