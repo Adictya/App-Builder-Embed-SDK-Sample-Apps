@@ -47,10 +47,10 @@ function App() {
     });
 
     eventUnsubscriptionEvents.current = [
-      unsubCreateEvent(),
-      unsubReadyToJoinEvent(),
-      unsubJoinEvent(),
-      unsubLeaveEvent(),
+      unsubCreateEvent,
+      unsubReadyToJoinEvent,
+      unsubJoinEvent,
+      unsubLeaveEvent,
     ];
 
     return () => {
